@@ -6,6 +6,7 @@
 
 var React = require('react/addons');
 var dom = React.DOM;
+var mergeProps = require('react/lib/ReactPropTransferer').mergeProps;
 
 function createIcon(type) {
     var iconType = type;
@@ -29,9 +30,7 @@ function createIcon(type) {
 
             var className = cs(classes) + " " + (this.props.className || '');
 
-            return this.transferPropsTo(
-                dom.i({className: className}, this.props.children)
-                );
+            return dom.i(mergeProps(this.props.children, { className: className }));
         }
     });
 }
@@ -46,9 +45,7 @@ var IconStack = React.createClass({
 
         var className = cs(classes) + " " + (this.props.className || '');
 
-        return this.transferPropsTo(
-            dom.span({className: className}, this.props.children)
-            );
+        return dom.span(mergeProps(this.props.children, { className: className }));
     }
 });
 
@@ -60,9 +57,7 @@ var Ul = React.createClass({
         }
         var className = cs(classes) + " " + (this.props.className || '');
 
-        return this.transferPropsTo(
-            dom.ul({className: className}, this.props.children)
-            );
+        return dom.ul(mergeProps(this.props.children, { className: className }));
     }
 });
 
